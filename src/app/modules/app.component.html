@@ -3,25 +3,40 @@
 </header>
 <main class="container-fluid" role="main">
   <div class="row">
-    <div class="col-2 bg-light">
+    <div class="col-3 bg-light">
+      <button class="btn btn-sm btn-primary mb-2" title="Refresh" (click)="refresh()"><fa-icon [icon]="['fas', 'sync']"></fa-icon></button>
       <div class="mb-2">
-        <select class="custom-select input-group" (change)="onPlayerChange($event)" [ngModel]="currentPlayer">
+        <h6>Spieler</h6>
+        <select class="custom-select input-group" #myPlayer (change)="onPlayerChange(myPlayer.value)">
           <option *ngFor="let player of players" value="{{player.id}}">{{player.name}}</option>
         </select>
       </div>
+      <h6>Navigation</h6>
       <div class="list-group">
-        <a class="list-group-item list-group-item-action" routerLink="/buildings" routerLinkActive="">Bauen</a>
+        <a class="list-group-item list-group-item-action" routerLink="/buildings" routerLinkActive="active">Bauen</a>
         <a class="list-group-item list-group-item-action" routerLink="/" routerLinkActive="">Forschen</a>
-        <a class="list-group-item list-group-item-action" routerLink="/resources" routerLinkActive="">Rohstoffe</a>
+        <a class="list-group-item list-group-item-action" routerLink="/resources" routerLinkActive="active">Rohstoffe</a>
         <a class="list-group-item list-group-item-action" routerLink="/" routerLinkActive="">Energie</a>
       </div>
       <div class="mt-4">
-        <div *ngFor="let res of resources">
-          <span>{{res.name}}</span><span class="mx-2">{{res.amount}}</span><span>{{res.production}}/min</span>
+        <h6>Rohstoffe</h6>
+        <div *ngFor="let res of resources" class="row text-sm">
+          <div class="col-3">
+            <span>{{res.type.name}}</span>
+          </div>
+          <div class="col-3">
+            <span title="amount">{{res.amount}}</span>
+          </div>
+          <div class="col-3">
+            <span title="capacity">/{{res.capacity}}</span>
+          </div>
+          <div class="col-3">
+            <span [class.text-success]="res.production >=0" [class.text-danger]="res.production < 0">{{res.production > 0 ? '+' : '-'}}{{res.production}}/min</span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-10">
+    <div class="col-9">
       <router-outlet></router-outlet>
     </div>
   </div>

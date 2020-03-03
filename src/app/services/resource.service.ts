@@ -11,12 +11,4 @@ export class ResourceService {
 
   }
 
-  findNewResourceDepot(config) {
-    const minAmount = 1000;
-    const maxAmount = 20000;
-    const amount = (Math.random() * (minAmount + maxAmount)) - minAmount;
-    const floorAmount = Math.floor(amount);
-    this.resourceDepots.push(new ResourceDepot(floorAmount, Resources.Iron));
-    console.log(this.resourceDepots);
-  }
 }

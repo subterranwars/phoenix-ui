@@ -1,5 +1,5 @@
 <h3>Buildings</h3>
 
-<div *ngFor="let building of buildings | async">
-  {{building.id}}{{building.name}}
+<div *ngFor="let building of buildings | async" class="mb-2">
+  <button class="btn btn-sm btn-primary">build</button><span class="mx-2">{{building.id}}</span><span>{{building.name}}</span>
 </div>

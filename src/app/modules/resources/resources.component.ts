@@ -16,8 +16,4 @@ export class ResourcesComponent implements OnInit {
     this.resources = this.resourceService.resourceDepots;
   }
 
-  findResources() {
-    this.resourceService.findNewResourceDepot(null);
-  }
-
 }
