@@ -1,0 +1,30 @@
+<header>
+  <app-header></app-header>
+</header>
+<main class="container-fluid" role="main">
+  <div class="row">
+    <div class="col-2 bg-light">
+      <div class="mb-2">
+        <select class="custom-select input-group" (change)="onPlayerChange($event)" [ngModel]="currentPlayer">
+          <option *ngFor="let player of players" value="{{player.id}}">{{player.name}}</option>
+        </select>
+      </div>
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action" routerLink="/buildings" routerLinkActive="">Bauen</a>
+        <a class="list-group-item list-group-item-action" routerLink="/" routerLinkActive="">Forschen</a>
+        <a class="list-group-item list-group-item-action" routerLink="/resources" routerLinkActive="">Rohstoffe</a>
+        <a class="list-group-item list-group-item-action" routerLink="/" routerLinkActive="">Energie</a>
+      </div>
+      <div class="mt-4">
+        <div *ngFor="let res of resources">
+          <span>{{res.name}}</span><span class="mx-2">{{res.amount}}</span><span>{{res.production}}/min</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</main>
+<app-footer></app-footer>

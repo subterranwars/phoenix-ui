@@ -5,7 +5,13 @@
         <div class="card-body">
           <h5 class="card-title">Übersicht</h5>
           <h6 class="card-subtitle mb-2 text-muted">Rohstoffe</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div *ngFor="let res of resources">
+            <span>{{res.type.name}}</span>
+            <span>{{res.amount}}</span>
+          </div>
+          <div *ngIf="resources.length == 0">
+            Bitte erst suchen (-:
+          </div>
         </div>
       </div>
     </div>
@@ -14,9 +20,7 @@
         <div class="card-body">
           <h5 class="card-title">Suchen</h5>
           <h6 class="card-subtitle mb-2 text-muted">Rohstoffe</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <button class="btn btn-primary" (click)="findResources()">Suchen</button>
         </div>
       </div>
       <div class="card">
