@@ -1,0 +1,20 @@
+body {
+  height: 2000px;
+}
+
+.container-fluid {
+    background-image: url('https://images.pexels.com/photos/106606/pexels-photo-106606.jpeg?cs=srgb&dl=sand-field-106606.jpg&fm=jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    font-family: 'Numans', sans-serif;
+    align-content: center;
+  }
+
+.card {
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  //background-color: rgba(0,0,0,0.5) !important;
+}

@@ -1,0 +1,16 @@
+// TODO MVR duplication of login... maybe merge somehow
+
+.container-fluid {
+  background-image: url('https://images.pexels.com/photos/106606/pexels-photo-106606.jpeg?cs=srgb&dl=sand-field-106606.jpg&fm=jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  font-family: 'Numans', sans-serif;
+  align-content: center;
+}
+
+.card {
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 600px;
+}

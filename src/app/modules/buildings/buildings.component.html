@@ -1,5 +1,15 @@
-<h3>Buildings</h3>
+<h3>Gebäude</h3>
 
-<div *ngFor="let building of buildings | async" class="mb-2">
-  <button class="btn btn-sm btn-primary">build</button><span class="mx-2">{{building.id}}</span><span>{{building.name}}</span>
+<div *ngFor="let level of buildingLevels$ | async" class="mb-2">
+    <h6>{{ level.building.label }}</h6>
+    <span class="text-sm">Level {{ level.level + 1}}</span>
+    <div class="text-muted text-sm">{{ level.building.description }}</div>
+    <div class="row">
+      <div class="col-4 text-sm" *ngFor="let key of keys(level.costs);">
+        {{key}} {{level.costs[key]}}
+      </div>
+    </div>
+
+    <button class="mt-2 btn btn-sm btn-primary" (click)="build(level)">{{ level.level === 0 ? 'bauen' : 'ausbauen' }}</button>
+  <hr/>
 </div>
