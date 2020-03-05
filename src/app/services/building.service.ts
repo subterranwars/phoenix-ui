@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {Token} from '../model/Token';
 import {User} from '../model/User';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class BuildingService {
   }
 
   build(user: User, buildingId: any) {
-    return this.http.post(`/buildings?userId=${user.id}&buildingId=${buildingId}`, null)
+    return this.http.post(`/buildings?userId=${user.getId()}&buildingId=${buildingId}`, null)
       .subscribe((response) => {
         console.log(response);
       });

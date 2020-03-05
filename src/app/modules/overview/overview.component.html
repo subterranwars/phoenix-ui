@@ -1,1 +1,15 @@
-<p>overview works!</p>
+<div>
+  <h2>Ereignisse</h2>
+  <div *ngIf="user.getEvents().length === 0" class="alert alert-info">
+    Keine Ereignisse.
+  </div>
+
+  <div *ngFor="let event of user.getEvents()" class="row">
+    <div class="col-4">
+      <app-countdown [time]="event.completedInSeconds"></app-countdown>
+    </div>
+    <div class="col-8">
+      {{event.label}}
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ResourceDepot} from '../../model/ResourceDepot';
 import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user.service';
+import {User} from '../../model/User';
 
 @Component({
   selector: 'app-main',
@@ -10,9 +10,7 @@ import {UserService} from '../../services/user.service';
 })
 export class MainComponent implements OnInit {
 
-  player: any;
-  resources: any[];
-  private state: any;
+  user: User;
 
   constructor(private userService: UserService, private authService: AuthService) {}
 
@@ -25,13 +23,8 @@ export class MainComponent implements OnInit {
   }
 
   refresh() {
-    this.userService.getState().subscribe((playerState) => {
-      console.log('Player State', playerState);
-      this.state = playerState;
-      this.player = playerState;
-      this.resources = this.player.resourceProductions.map(rp => {
-            return new ResourceDepot(rp.storage.amount, rp.storage.capacity, rp.productionValue, rp.storage.resource);
-      });
+    this.userService.getUser().subscribe((user: User) => {
+      this.user = user;
     });
   }
 }

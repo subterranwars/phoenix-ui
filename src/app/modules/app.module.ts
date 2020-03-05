@@ -32,6 +32,7 @@ import {AuthInterceptor} from '../interceptors/auth.interceptor';
 import {XhrInterceptor} from '../interceptors/xhr.interceptor';
 import { MainComponent } from './main/main.component';
 import { OverviewComponent } from './overview/overview.component';
+import { CountdownComponent } from './countdown/countdown.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { OverviewComponent } from './overview/overview.component';
     AlertComponent,
     MainComponent,
     OverviewComponent,
+    CountdownComponent,
   ],
   imports: [
     BrowserModule,

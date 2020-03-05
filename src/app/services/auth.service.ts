@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import {User} from '../model/User';
+import {Token} from '../model/Token';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  currentUser: User;
+  currentToken: Token;
   constructor(private http: HttpClient, private router: Router) {
   }
 
@@ -15,10 +15,10 @@ export class AuthService {
       .pipe(map((res: any) => {
         if (res && res.token && res.username) {
           localStorage.setItem('access_token', res.token);
-          this.currentUser = new User(res.id, res.username, res.token);
-          return this.currentUser;
+          this.currentToken = new Token(res.id, res.username, res.token);
+          return this.currentToken;
         }
-        return this.currentUser;
+        return this.currentToken;
       }));
   }
 
@@ -37,6 +37,6 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    return localStorage.getItem('access_token') !== null;
+    return localStorage.getItem('access_token') !== null && this.currentToken != null;
   }
 }
