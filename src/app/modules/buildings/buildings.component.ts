@@ -10,13 +10,13 @@ import {User} from '../../model/User';
   styleUrls: ['./buildings.component.scss']
 })
 export class BuildingsComponent implements OnInit {
-  buildingLevels$;
+  constructionInfos$;
   private user: User;
 
   constructor(private buildingService: BuildingService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.buildingLevels$ = this.buildingService.getBuildings();
+    this.constructionInfos$ = this.buildingService.listBuildings();
     this.userService.getUser().subscribe((user: User) => {
       this.user = user;
     });

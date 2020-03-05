@@ -10,7 +10,7 @@ export class BuildingService {
 
   constructor(private http: HttpClient) { }
 
-  getBuildings() {
+  listBuildings() {
     return this.http.get('/buildings');
   }
 

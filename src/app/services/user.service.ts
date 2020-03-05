@@ -12,7 +12,7 @@ import {GameEvent} from '../model/GameEvent';
 })
 export class UserService {
   // tslint:disable-next-line:variable-name
-  private _user: BehaviorSubject<User> = new BehaviorSubject(null);
+  private _user: BehaviorSubject<User> = new BehaviorSubject(new User(-1, 'dummy'));
 
   private user: Observable<User> = this._user.asObservable();
 
@@ -36,7 +36,7 @@ export class UserService {
           }
       });
       user.setEvents(events);
-      //user.setBuildings(buildings);
+      // user.setBuildings(buildings);
       this._user.next(user);
     });
     return this.user;

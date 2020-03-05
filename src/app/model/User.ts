@@ -2,8 +2,8 @@ import {ResourceDepot} from './ResourceDepot';
 import {GameEvent} from './GameEvent';
 
 export class User {
-  private resourceDepots: ResourceDepot[];
-  private events: GameEvent[];
+  private resourceDepots: ResourceDepot[] = [];
+  private events: GameEvent[] = [];
 
   constructor(private id: number, private name: string) {
 
