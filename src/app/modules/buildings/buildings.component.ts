@@ -11,7 +11,7 @@ import {User} from '../../model/User';
 })
 export class BuildingsComponent implements OnInit {
   constructionInfos$;
-  private user: User;
+  user: User;
 
   constructor(private buildingService: BuildingService, private userService: UserService) { }
 
@@ -24,6 +24,7 @@ export class BuildingsComponent implements OnInit {
 
   build(buildingLevel) {
     this.buildingService.build(this.user, buildingLevel.building.id);
+    this.userService.refresh();
   }
 
   keys(costs: any) {

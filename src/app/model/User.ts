@@ -1,5 +1,7 @@
 import {ResourceDepot} from './ResourceDepot';
 import {GameEvent} from './GameEvent';
+import {ConstructionGameEvent} from './ConstructionGameEvent';
+import {GameEventType} from './GameEventType';
 
 export class User {
   private resourceDepots: ResourceDepot[] = [];
@@ -31,5 +33,18 @@ export class User {
 
   getName() {
     return this.name;
+  }
+
+  isConstructionInProgress(): boolean {
+    return this.getConstructionInProgress() != null;
+  }
+
+  getConstructionInProgress(): ConstructionGameEvent {
+    const constructionEvents = this.events.filter(event => event instanceof ConstructionGameEvent)
+                                            .map(event => event as ConstructionGameEvent);
+    if (constructionEvents.length > 0) {
+      return constructionEvents[0];
+    }
+    return null;
   }
 }

@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Token} from '../model/Token';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {catchError} from 'rxjs/operators';
 import {ResourceDepot} from '../model/ResourceDepot';
 import {User} from '../model/User';
-import {GameEvent} from '../model/GameEvent';
+import {ConstructionGameEvent} from '../model/ConstructionGameEvent';
+import {Building} from '../model/Building';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class UserService {
       user.setResourceDepots(resourceDepots);
       const events = userJson.events.map(e => {
           if (e.type === 'construction') {
-            return new GameEvent(e.completedInSeconds, 'Gebäudebau: ' + e.building.label + ' (Stufe: ' + e.level + ' )');
+            return new ConstructionGameEvent(new Building(e.building.id, e.building.label), e.level, e.completedInSeconds);
           }
       });
       user.setEvents(events);
@@ -40,5 +40,9 @@ export class UserService {
       this._user.next(user);
     });
     return this.user;
+  }
+
+  refresh() {
+    return this.getUser();
   }
 }

@@ -1,3 +1,5 @@
+import {GameEventType} from './GameEventType';
+
 export class GameEvent {
-  constructor(public completedInSeconds: number, public label: string) {}
+  constructor(public type: GameEventType, public completedInSeconds: number, public label: string) {}
 }
