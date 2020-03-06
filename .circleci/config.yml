@@ -14,9 +14,7 @@ jobs:
 
       - run: echo 'export PATH=~/project/node_modules/@angular/cli/bin:$PATH' >> $BASH_ENV
       - run: npm install
-      - run: ng build
-      # TODO MVR maybe run --prod
-      # - run: ng build --prod ?
+      - run: ng build --prod
 
       - save_cache:
           paths:
