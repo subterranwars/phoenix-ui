@@ -1,0 +1,38 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:12
+    steps:
+      - add_ssh_keys
+
+      - checkout
+
+      - restore_cache:
+          key: npm-cache-{{ checksum "package.json" }}
+
+      - run: echo 'export PATH=~/project/node_modules/@angular/cli/bin:$PATH' >> $BASH_ENV
+      - run: npm install
+      - run: ng build
+      # TODO MVR maybe run --prod
+      # - run: ng build --prod ?
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: npm-cache-{{ checksum "package.json" }}
+
+#     TODO MVR run tests and fetch test results
+#      - store_test_results:
+#          path: target/surefire-reports
+
+      - store_artifacts:
+          path: dist/my-app
+
+      - setup_remote_docker
+      - run: docker build -t subterranwars/phoenix-ui:bleeding .
+      - run: docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+      - run: docker push subterranwars/phoenix-ui:bleeding
+      - run: echo "${SSH_HOST} ${SSH_HOST_KEY}" >> ~/.ssh/known_hosts
+      - run: ssh $SSH_USER@$SSH_HOST "~/deploy_bleeding.sh"
