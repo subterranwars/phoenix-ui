@@ -9,9 +9,9 @@ import { environment } from '../../environments/environment';
 
 // Icons
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSquare, faCheckSquare, faSync, faKey, faUser } from '@fortawesome/free-solid-svg-icons';
-import { faSquare as farSquare, faCheckSquare as farCheckSquare } from '@fortawesome/free-regular-svg-icons';
-import { faStackOverflow, faGithub, faMedium } from '@fortawesome/free-brands-svg-icons';
+import {fas} from '@fortawesome/free-solid-svg-icons';
+import {far} from '@fortawesome/free-regular-svg-icons';
+import {fab} from '@fortawesome/free-brands-svg-icons';
 
 // App internal
 import { AppRoutingModule } from './app-routing.module';
@@ -69,6 +69,8 @@ import { CountdownComponent } from './countdown/countdown.component';
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faSquare, faCheckSquare, farSquare, farCheckSquare, faStackOverflow, faGithub, faMedium, faSync, faKey, faUser);
+    library.addIconPacks(fas);
+    library.addIconPacks(far);
+    library.addIconPacks(fab);
   }
 }

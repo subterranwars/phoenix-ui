@@ -10,7 +10,8 @@
 }
 
 .card {
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 600px;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  min-width: 600px;
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BuildingService} from '../../services/building.service';
 import {UserService} from '../../services/user.service';
-import {AuthService} from '../../services/auth.service';
 import {User} from '../../model/User';
 
 @Component({

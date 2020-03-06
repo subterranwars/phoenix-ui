@@ -1,1 +1,63 @@
-<p>Resource Module works \o/</p>
+<h3>Rohstoffe</h3>
+
+<div class="alert alert-info" *ngIf="!user.hasResourceBuilding()">Noch kein Rohstoffgebäude gebaut. Bitte bauen.</div>
+
+<div *ngIf="user.hasResourceBuilding()">
+  <h5>Neue Vorkommen suchen</h5>
+  <form>
+    <div class="form-group">
+      <label>Rohstoff</label>
+      <select class="custom-select">
+        <option value="iron">Eisen</option>
+        <option value="stone">Stein</option>
+        <option value="oil">Öl</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Dauer</label>
+      <input type="text" class="form-control"/>
+    </div>
+    <button class="btn btn-sm btn-primary">suchen</button>
+  </form>
+
+  <h5 class="mt-4">Drohnenstatus</h5>
+  <div>
+    <div>
+      Vorhandene Drohnen: 30
+    </div>
+    <div>
+      Davon benutzt: 0
+    </div>
+    <div>
+      Unbenutzt: 30
+    </div>
+  </div>
+
+  <h5 class="mt-4">Vorhandene Vorkommen</h5>
+  <div>
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>Rohstoff</th>
+          <th>Größe</th>
+          <th>verbleibend</th>
+          <th>Drohnenanzahl</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Eisen</td>
+          <td>12345</td>
+          <td>12300</td>
+          <td>
+            <input class="form-control" type="number" value="5" min="0" max="100"/>
+          </td>
+          <td>
+            <button class="btn btn-link text-danger" title="löschen"><fa-icon [icon]="['fas', 'times']"></fa-icon></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

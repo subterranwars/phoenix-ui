@@ -6,6 +6,7 @@ import {ResourceDepot} from '../model/ResourceDepot';
 import {User} from '../model/User';
 import {ConstructionGameEvent} from '../model/ConstructionGameEvent';
 import {Building} from '../model/Building';
+import {BuildingLevel} from '../model/BuildingLevel';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,10 @@ export class UserService {
           }
       });
       user.setEvents(events);
-      // user.setBuildings(buildings);
+      const buildings = userJson.buildings.map(b => {
+        return new BuildingLevel(new Building(b.building.id, b.building.label), b.level);
+      });
+      user.setBuildings(buildings);
       this._user.next(user);
     });
     return this.user;
