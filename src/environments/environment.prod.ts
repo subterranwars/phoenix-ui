@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://subterranwars.de:6001'
+  apiUrl: 'https://api.subterranwars.de'
 };
