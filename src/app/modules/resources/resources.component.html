@@ -1,8 +1,8 @@
 <h3>Rohstoffe</h3>
 
-<div class="alert alert-info" *ngIf="!user.hasResourceBuilding()">Noch kein Rohstoffgebäude gebaut. Bitte bauen.</div>
+<div class="alert alert-info" *ngIf="!player.hasResourceBuilding()">Noch kein Rohstoffgebäude gebaut. Bitte bauen.</div>
 
-<div *ngIf="user.hasResourceBuilding()">
+<div *ngIf="player.hasResourceBuilding()">
   <h5>Neue Vorkommen suchen</h5>
   <form>
     <div class="form-group">

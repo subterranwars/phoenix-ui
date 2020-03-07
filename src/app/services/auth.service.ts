@@ -11,11 +11,11 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`users/authenticate`, { username, password })
+    return this.http.post<any>(`authenticate`, { username, password })
       .pipe(map((res: any) => {
-        if (res && res.token && res.username) {
+        if (res && res.token) {
           localStorage.setItem('access_token', res.token);
-          this.currentToken = new Token(res.id, res.username, res.token);
+          this.currentToken = new Token(res.token, res.expireTime);
           return this.currentToken;
         }
         return this.currentToken;

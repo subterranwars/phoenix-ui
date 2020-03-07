@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../services/user.service';
-import {User} from '../../model/User';
+import {PlayerService} from '../../services/player.service';
+import {Player} from '../../model/Player';
 
 @Component({
   selector: 'app-overview',
@@ -8,13 +8,13 @@ import {User} from '../../model/User';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-  user: User;
+  player: Player;
 
-  constructor(private userService: UserService) { }
+  constructor(private playerService: PlayerService) { }
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe((user: User) => {
-      this.user = user;
+    this.playerService.getPlayer().subscribe((player: Player) => {
+      this.player = player;
     });
   }
 

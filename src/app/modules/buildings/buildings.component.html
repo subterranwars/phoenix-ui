@@ -13,8 +13,8 @@
       <span class="text-sm">Bauzeit {{info.buildTimeInSeconds}}</span>
     </div>
 
-    <div *ngIf="user.getConstructionInProgress() != null && user.getConstructionInProgress().building.id === info.building.id"><app-countdown [time]="user.getConstructionInProgress().completedInSeconds"></app-countdown></div>
+    <div *ngIf="player.getConstructionInProgress() != null && player.getConstructionInProgress().building.id === info.building.id"><app-countdown [time]="player.getConstructionInProgress().completedInSeconds"></app-countdown></div>
 
-    <button class="mt-2 btn btn-sm btn-primary" (click)="build(info)" [disabled]="user.isConstructionInProgress()">{{ info.levelToBuild === 1 ? 'bauen' : 'ausbauen' }}</button>
+    <button class="mt-2 btn btn-sm btn-primary" (click)="build(info)" [disabled]="player.isConstructionInProgress()">{{ info.levelToBuild === 1 ? 'bauen' : 'ausbauen' }}</button>
   <hr/>
 </div>

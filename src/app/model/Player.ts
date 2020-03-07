@@ -4,7 +4,7 @@ import {ConstructionGameEvent} from './ConstructionGameEvent';
 import {GameEventType} from './GameEventType';
 import {BuildingLevel} from './BuildingLevel';
 
-export class User {
+export class Player {
   private resourceDepots: ResourceDepot[] = [];
   private events: GameEvent[] = [];
   private buildings: BuildingLevel[] = [];

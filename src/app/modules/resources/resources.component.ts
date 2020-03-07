@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ResourceService} from '../../services/resource.service';
-import {UserService} from '../../services/user.service';
-import {User} from '../../model/User';
+import {PlayerService} from '../../services/player.service';
+import {Player} from '../../model/Player';
 
 @Component({
   selector: 'app-resources',
@@ -10,15 +10,15 @@ import {User} from '../../model/User';
 })
 export class ResourcesComponent implements OnInit {
   resources;
-  user: User;
+  player: Player;
 
-  constructor(private resourceService: ResourceService, private userService: UserService) {
+  constructor(private resourceService: ResourceService, private playerService: PlayerService) {
   }
 
   ngOnInit(): void {
     this.resources = this.resourceService.resourceDepots;
-    this.userService.getUser().subscribe((u: User) => {
-      this.user = u;
+    this.playerService.getPlayer().subscribe((player: Player) => {
+      this.player = player;
     });
   }
 
