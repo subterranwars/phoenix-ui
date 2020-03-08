@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Token} from '../model/Token';
-import {User} from '../model/User';
+import {Player} from '../model/Player';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,11 @@ export class BuildingService {
   constructor(private http: HttpClient) { }
 
   listBuildings() {
-    return this.http.get('/buildings');
+    return this.http.get('/constructions');
   }
 
-  build(user: User, buildingId: any) {
-    return this.http.post(`/buildings?userId=${user.getId()}&buildingId=${buildingId}`, null)
+  build(player: Player, buildingId: any) {
+    return this.http.post(`/constructions?playerId=${player.getId()}&buildingId=${buildingId}`, null)
       .subscribe((response) => {
         console.log(response);
       });

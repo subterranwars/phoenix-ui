@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BuildingService} from '../../services/building.service';
-import {UserService} from '../../services/user.service';
-import {User} from '../../model/User';
+import {PlayerService} from '../../services/player.service';
+import {Player} from '../../model/Player';
 
 @Component({
   selector: 'app-buildings',
@@ -10,20 +10,20 @@ import {User} from '../../model/User';
 })
 export class BuildingsComponent implements OnInit {
   constructionInfos$;
-  user: User;
+  player: Player;
 
-  constructor(private buildingService: BuildingService, private userService: UserService) { }
+  constructor(private buildingService: BuildingService, private playerService: PlayerService) { }
 
   ngOnInit(): void {
     this.constructionInfos$ = this.buildingService.listBuildings();
-    this.userService.getUser().subscribe((user: User) => {
-      this.user = user;
+    this.playerService.getPlayer().subscribe((player: Player) => {
+      this.player = player;
     });
   }
 
   build(buildingLevel) {
-    this.buildingService.build(this.user, buildingLevel.building.id);
-    this.userService.refresh();
+    this.buildingService.build(this.player, buildingLevel.building.id);
+    this.playerService.refresh();
   }
 
   keys(costs: any) {

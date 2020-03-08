@@ -7,7 +7,7 @@
       <div class="mb-2">
         <h6>Spieler</h6>
         <button class="btn btn-sm btn-primary mb-2" title="Refresh" (click)="refresh()"><fa-icon [icon]="['fas', 'sync']"></fa-icon></button>
-        {{user ? user.getName() : ''}}
+        {{player ? player.getName() : ''}}
       </div>
       <h6>Navigation</h6>
       <div class="list-group">
@@ -20,7 +20,7 @@
       </div>
       <div class="mt-4">
         <h6>Rohstoffe</h6>
-        <div *ngFor="let res of user.getResources()" class="row text-sm">
+        <div *ngFor="let res of player.getResources()" class="row text-sm">
           <div class="col-3">
             <span>{{res.type}}</span>
           </div>

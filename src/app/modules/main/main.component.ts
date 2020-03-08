@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-import {UserService} from '../../services/user.service';
-import {User} from '../../model/User';
+import {PlayerService} from '../../services/player.service';
+import {Player} from '../../model/Player';
 
 @Component({
   selector: 'app-main',
@@ -10,9 +10,9 @@ import {User} from '../../model/User';
 })
 export class MainComponent implements OnInit {
 
-  user: User;
+  player: Player;
 
-  constructor(private userService: UserService, private authService: AuthService) {}
+  constructor(private playerService: PlayerService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.refresh();
@@ -23,8 +23,8 @@ export class MainComponent implements OnInit {
   }
 
   refresh() {
-    this.userService.getUser().subscribe((user: User) => {
-      this.user = user;
+    this.playerService.getPlayer().subscribe((player: Player) => {
+      this.player = player;
     });
   }
 }

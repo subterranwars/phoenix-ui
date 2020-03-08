@@ -1,11 +1,9 @@
 export class Token {
-  id: number;
-  username: string;
   token: string;
+  expireTime: number;
 
-  constructor(id: number, username: string, token: string) {
-    this.id = id;
-    this.username = username;
+  constructor(token: string, expireTime: number) {
     this.token = token;
+    this.expireTime = expireTime;
   }
 }
