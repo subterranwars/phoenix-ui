@@ -1,6 +1,6 @@
 import {GameEventType} from './GameEventType';
 import {GameEvent} from './GameEvent';
-import {Building} from './Building';
+import {Building} from '../Building';
 
 export class ConstructionGameEvent extends GameEvent {
   public building: Building;

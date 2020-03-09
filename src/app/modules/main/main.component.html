@@ -31,7 +31,7 @@
             <span title="capacity">/{{res.capacity}}</span>
           </div>
           <div class="col-3">
-            <span [class.text-success]="res.production >=0" [class.text-danger]="res.production < 0">{{res.production > 0 ? '+' : '-'}}{{res.production}}/min</span>
+            <span [class.text-success]="res.production >= 0" [class.text-danger]="res.production < 0">{{res.production >= 0 ? '+' : '-'}}{{res.production}}/min</span>
           </div>
         </div>
       </div>

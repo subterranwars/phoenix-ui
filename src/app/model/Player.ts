@@ -1,13 +1,14 @@
-import {ResourceDepot} from './ResourceDepot';
-import {GameEvent} from './GameEvent';
-import {ConstructionGameEvent} from './ConstructionGameEvent';
-import {GameEventType} from './GameEventType';
+import {GameEvent} from './events/GameEvent';
+import {ConstructionGameEvent} from './events/ConstructionGameEvent';
 import {BuildingLevel} from './BuildingLevel';
+import {ResourceDepot} from './ResourceDepot';
+import {ResourceSite} from './ResourceSite';
 
 export class Player {
   private resourceDepots: ResourceDepot[] = [];
   private events: GameEvent[] = [];
   private buildings: BuildingLevel[] = [];
+  private resourceSites: ResourceSite[] = [];
 
   constructor(private id: number, private name: string) {
 
@@ -35,6 +36,14 @@ export class Player {
 
   getName() {
     return this.name;
+  }
+
+  getResourceSites(): ResourceSite[] {
+    return this.resourceSites;
+  }
+
+  setResourceSites(value: ResourceSite[]) {
+    this.resourceSites = value;
   }
 
   hasResourceBuilding(): boolean {

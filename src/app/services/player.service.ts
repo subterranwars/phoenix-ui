@@ -2,11 +2,14 @@ import {Injectable} from '@angular/core';
 import {Token} from '../model/Token';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {ResourceDepot} from '../model/ResourceDepot';
 import {Player} from '../model/Player';
-import {ConstructionGameEvent} from '../model/ConstructionGameEvent';
+import {ConstructionGameEvent} from '../model/events/ConstructionGameEvent';
 import {Building} from '../model/Building';
 import {BuildingLevel} from '../model/BuildingLevel';
+import {ResourceSearchGameEvent} from '../model/events/ResourceSearchGameEvent';
+import {Resource} from '../model/Resource';
+import {ResourceDepot} from '../model/ResourceDepot';
+import {ResourceSite} from '../model/ResourceSite';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +34,22 @@ export class PlayerService {
           if (e.type === 'construction') {
             return new ConstructionGameEvent(new Building(e.building.id, e.building.label), e.level, e.completedInSeconds);
           }
+          if (e.type === 'resource-search') {
+            return new ResourceSearchGameEvent(
+              new Resource(e.resource.id, e.resource.name, e.resource.label), e.durationInHours, e.completedInSeconds);
+          }
       });
       player.setEvents(events);
       const buildings = playerJson.buildings.map(b => {
         return new BuildingLevel(new Building(b.building.id, b.building.label), b.level);
       });
       player.setBuildings(buildings);
+
+      const sites = playerJson.resourceSites.map(site => {
+        return new ResourceSite(site.id, site.storage.resource, site.storage.amount, site.storage.capacity, site.droneCount);
+      });
+      player.setResourceSites(sites);
+
       this._player.next(player);
     });
     return this.player;

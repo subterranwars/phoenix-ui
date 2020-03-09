@@ -4,18 +4,14 @@
 
 <div *ngIf="player.hasResourceBuilding()">
   <h5>Neue Vorkommen suchen</h5>
-  <form>
-    <div class="form-group">
-      <label>Rohstoff</label>
-      <select class="custom-select">
-        <option value="iron">Eisen</option>
-        <option value="stone">Stein</option>
-        <option value="oil">Öl</option>
-      </select>
-    </div>
+  <form [formGroup]="resourceSitesForm" (ngSubmit)="onSubmit()">
+    <select formControlName="resource" (change)="changeResource($event)">
+      <option disabled>Wähle Rohstoff</option>
+      <option *ngFor="let resource of resources" value="{{resource.id}}">{{resource.label}}</option>
+    </select>
     <div class="form-group">
       <label>Dauer</label>
-      <input type="text" class="form-control"/>
+      <input formControlName="duration" type="text" class="form-control"/>
     </div>
     <button class="btn btn-sm btn-primary">suchen</button>
   </form>
@@ -35,7 +31,11 @@
 
   <h5 class="mt-4">Vorhandene Vorkommen</h5>
   <div>
-    <table class="table table-sm table-striped">
+    <div *ngIf="player.getResourceSites().length == 0" class="alert alert-info">
+      Noch keine Vorkommen vorhanden. Bitte zuerst danach suchen.
+    </div>
+
+    <table class="table table-sm table-striped" *ngIf="player.getResourceSites().length > 0">
       <thead>
         <tr>
           <th>Rohstoff</th>
@@ -46,15 +46,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Eisen</td>
-          <td>12345</td>
-          <td>12300</td>
+        <tr *ngFor="let site of player.getResourceSites()">
+          <td>{{site.resource}}</td>
+          <td>{{site.capacity}}</td>
+          <td>{{site.amount}}</td>
           <td>
-            <input class="form-control" type="number" value="5" min="0" max="100"/>
+            <input class="form-control" type="number" value="{{site.droneCount}}" min="0" max="100" (change)="updateDroneCount(site.id, $event)"/>
           </td>
           <td>
-            <button class="btn btn-link text-danger" title="löschen"><fa-icon [icon]="['fas', 'times']"></fa-icon></button>
+            <button class="btn btn-link text-danger" title="löschen" (click)="deleteSite(site.id)"><fa-icon [icon]="['fas', 'times']"></fa-icon></button>
           </td>
         </tr>
       </tbody>

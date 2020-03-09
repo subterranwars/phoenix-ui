@@ -1,4 +1,4 @@
 export class Resource {
-  constructor(private id, private name) {
+  constructor(public id, public name, public label) {
   }
 }
