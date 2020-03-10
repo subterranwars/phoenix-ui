@@ -27,7 +27,7 @@ export class PlayerService {
       console.log('Player State', playerJson);
       const player = new Player(playerJson.id, playerJson.name);
       const resourceDepots = playerJson.resourceProductions.map(rp => {
-        return new ResourceDepot(rp.storage.amount, rp.storage.capacity, rp.productionValue, rp.storage.resource);
+        return new ResourceDepot(rp.storage.amount, rp.storage.capacity, rp.resourceProduction.productionPerTimeUnit, rp.resource);
       });
       player.setResourceDepots(resourceDepots);
       const events = playerJson.events.map(e => {
