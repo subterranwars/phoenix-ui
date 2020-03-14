@@ -23,7 +23,6 @@ export class BuildingsComponent implements OnInit {
 
   build(buildingLevel) {
     this.buildingService.build(this.player, buildingLevel.building.id);
-    this.playerService.refresh();
   }
 
   keys(costs: any) {

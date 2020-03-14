@@ -10,10 +10,10 @@
       </div>
     </div>
     <div class="row col-12">
-      <span class="text-sm">Bauzeit {{info.buildTimeInSeconds}}</span>
+      <span class="text-sm">Bauzeit {{info.buildTime.milliseconds / 1000}}</span>
     </div>
 
-    <div *ngIf="player.getConstructionInProgress() != null && player.getConstructionInProgress().building.id === info.building.id"><app-countdown [time]="player.getConstructionInProgress().completedInSeconds"></app-countdown></div>
+    <div *ngIf="player.getConstructionInProgress() != null && player.getConstructionInProgress().building.id === info.building.id"><app-countdown [time]="player.getConstructionInProgress().progress.seconds"></app-countdown></div>
 
     <button class="mt-2 btn btn-sm btn-primary" (click)="build(info)" [disabled]="player.isConstructionInProgress()">{{ info.levelToBuild === 1 ? 'bauen' : 'ausbauen' }}</button>
   <hr/>

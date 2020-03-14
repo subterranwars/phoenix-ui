@@ -6,7 +6,10 @@
 
   <div *ngFor="let event of player.getEvents()" class="row">
     <div class="col-4">
-      <app-countdown [time]="event.completedInSeconds"></app-countdown>
+      <app-countdown *ngIf="!event.progress.indeterminate" [time]="event.progress.seconds"></app-countdown>
+      <div class="progress" *ngIf="event.progress.indeterminate">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+      </div>
     </div>
     <div class="col-8">
       {{event.label}}
