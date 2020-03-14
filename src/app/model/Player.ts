@@ -9,6 +9,7 @@ export class Player {
   private events: GameEvent[] = [];
   private buildings: BuildingLevel[] = [];
   private resourceSites: ResourceSite[] = [];
+  private energy: number;
 
   constructor(private id: number, private name: string) {
 
@@ -65,5 +66,13 @@ export class Player {
       return constructionEvents[0];
     }
     return null;
+  }
+
+  setEnergy(productionPerTimeUnit: number) {
+    this.energy = productionPerTimeUnit;
+  }
+
+  getEnergy() {
+    return this.energy;
   }
 }

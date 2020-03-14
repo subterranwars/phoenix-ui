@@ -18,8 +18,8 @@
         <a class="list-group-item list-group-item-action" routerLink="/main" routerLinkActive="">Energie</a>
         <a class="list-group-item list-group-item-action" href="" (click)="logout()">Logout</a>
       </div>
-      <div class="mt-4">
-        <h6>Rohstoffe</h6>
+      <div>
+        <h6 class="mt-4 mb-0">Rohstoffe</h6>
         <div *ngFor="let res of player.getResources()" class="row text-sm">
           <div class="col-3">
             <span>{{res.type}}</span>
@@ -31,8 +31,12 @@
             <span title="capacity">/{{res.capacity}}</span>
           </div>
           <div class="col-3">
-            <span [class.text-success]="res.production >= 0" [class.text-danger]="res.production < 0">{{res.production >= 0 ? '+' : '-'}}{{res.production}}/min</span>
+            <span [class.text-success]="res.production >= 0" [class.text-danger]="res.production < 0">{{res.production >= 0 ? '+' : ''}}{{res.production}}/min</span>
           </div>
+        </div>
+        <h6 class="mt-4 mb-0">Energie</h6>
+        <div class="text-sm">
+          <span [class.text-success]="player.getEnergy() >= 0" [class.text-danger]="player.getEnergy() < 0">{{player.getEnergy() >= 0 ? '+' : ''}}{{player.getEnergy()}}/h</span>
         </div>
       </div>
     </div>

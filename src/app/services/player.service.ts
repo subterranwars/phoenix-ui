@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Token} from '../model/Token';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Player} from '../model/Player';
@@ -10,6 +9,7 @@ import {ResourceSearchGameEvent} from '../model/events/ResourceSearchGameEvent';
 import {Resource} from '../model/Resource';
 import {ResourceDepot} from '../model/ResourceDepot';
 import {ResourceSite} from '../model/ResourceSite';
+import {Progress} from '../model/events/Progress';
 
 @Injectable({
   providedIn: 'root'
@@ -32,11 +32,15 @@ export class PlayerService {
       player.setResourceDepots(resourceDepots);
       const events = playerJson.events.map(e => {
           if (e.type === 'construction') {
-            return new ConstructionGameEvent(new Building(e.building.id, e.building.label), e.level, e.completedInSeconds);
+            return new ConstructionGameEvent(
+              new Building(e.building.id, e.building.label),
+              e.level,
+              new Progress(e.progress.indeterminate, e.progress.value, e.progress.duration.milliseconds));
           }
           if (e.type === 'resource-search') {
             return new ResourceSearchGameEvent(
-              new Resource(e.resource.id, e.resource.name, e.resource.label), e.durationInHours, e.completedInSeconds);
+              new Resource(e.resource.id, e.resource.name, e.resource.label),
+              new Progress(e.progress.indeterminate, e.progress.value, e.progress.duration.milliseconds));
           }
       });
       player.setEvents(events);
@@ -49,6 +53,7 @@ export class PlayerService {
         return new ResourceSite(site.id, site.storage.resource, site.storage.amount, site.storage.capacity, site.droneCount);
       });
       player.setResourceSites(sites);
+      player.setEnergy(playerJson.energy.production.productionPerTimeUnit);
 
       this._player.next(player);
     });

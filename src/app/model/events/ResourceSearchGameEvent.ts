@@ -2,16 +2,15 @@ import {GameEventType} from './GameEventType';
 import {GameEvent} from './GameEvent';
 import {Building} from '../Building';
 import {Resource} from '../Resource';
+import {Progress} from './Progress';
 
 export class ResourceSearchGameEvent extends GameEvent {
   public resource: Resource;
-  public durationInHours: number;
 
-  constructor(resource: Resource, durationInHours: number, completedInSeconds: number) {
+  constructor(resource: Resource, progress: Progress) {
     super(GameEventType.ResourceSearch,
-      completedInSeconds,
-      'Vorkommenssuche: ' + resource.label + ' (Dauer: ' + durationInHours + ' Stunde(n))');
+      progress,
+      'Vorkommenssuche: ' + resource.label);
     this.resource = resource;
-    this.durationInHours = durationInHours;
   }
 }
