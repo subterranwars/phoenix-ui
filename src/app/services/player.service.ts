@@ -10,6 +10,8 @@ import {Resource} from '../model/Resource';
 import {ResourceDepot} from '../model/ResourceDepot';
 import {ResourceSite} from '../model/ResourceSite';
 import {Progress} from '../model/events/Progress';
+import {WebSocketService} from './websocket.service';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,47 +22,61 @@ export class PlayerService {
 
   private player: Observable<Player> = this._player.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private webSocketService: WebSocketService, authService: AuthService) {
+    const stompClient = this.webSocketService.connect();
+    stompClient.connect({
+      Authorization: 'Bearer ' + authService.currentToken.token
+    }, () => {
+      stompClient.subscribe('/user/updates', success => {
+        this.update(JSON.parse(success.body));
+      }, error => {
+        console.log('ERROR', error);
+      });
+    });
+
+  }
 
    getPlayer(): Observable<Player> {
-    this.http.get(`players/state`).subscribe((playerJson: any) => {
-      console.log('Player State', playerJson);
-      const player = new Player(playerJson.id, playerJson.name);
-      const resourceDepots = playerJson.resourceProductions.map(rp => {
-        return new ResourceDepot(rp.storage.amount, rp.storage.capacity, rp.resourceProduction.productionPerTimeUnit, rp.resource);
-      });
-      player.setResourceDepots(resourceDepots);
-      const events = playerJson.events.map(e => {
-          if (e.type === 'construction') {
-            return new ConstructionGameEvent(
-              new Building(e.building.id, e.building.label),
-              e.level,
-              new Progress(e.progress.indeterminate, e.progress.value, e.progress.duration.milliseconds));
-          }
-          if (e.type === 'resource-search') {
-            return new ResourceSearchGameEvent(
-              new Resource(e.resource.id, e.resource.name, e.resource.label),
-              new Progress(e.progress.indeterminate, e.progress.value, e.progress.duration.milliseconds));
-          }
-      });
-      player.setEvents(events);
-      const buildings = playerJson.buildings.map(b => {
-        return new BuildingLevel(new Building(b.building.id, b.building.label), b.level);
-      });
-      player.setBuildings(buildings);
-
-      const sites = playerJson.resourceSites.map(site => {
-        return new ResourceSite(site.id, site.storage.resource, site.storage.amount, site.storage.capacity, site.droneCount);
-      });
-      player.setResourceSites(sites);
-      player.setEnergy(playerJson.energy.production.productionPerTimeUnit);
-
-      this._player.next(player);
-    });
     return this.player;
   }
 
   refresh() {
     return this.getPlayer();
+  }
+
+  private update(playerJson: any) {
+    console.log('Player State', playerJson);
+    const player = new Player(playerJson.id, playerJson.name);
+    const resourceDepots = playerJson.resourceProductions.map(rp => {
+      return new ResourceDepot(rp.storage.amount, rp.storage.capacity, rp.resourceProduction.productionPerTimeUnit, rp.resource);
+    });
+    player.setResourceDepots(resourceDepots);
+    const events = playerJson.events.map(e => {
+      if (e.type === 'construction') {
+        return new ConstructionGameEvent(
+          new Building(e.building.id, e.building.label),
+          e.level,
+          new Progress(e.progress.indeterminate, e.progress.value, e.progress.duration.milliseconds));
+      }
+      if (e.type === 'resource-search') {
+        return new ResourceSearchGameEvent(
+          new Resource(e.resource.id, e.resource.name, e.resource.label),
+          new Progress(e.progress.indeterminate, e.progress.value, e.progress.duration.milliseconds));
+      }
+    });
+    player.setEvents(events);
+    const buildings = playerJson.buildings.map(b => {
+      return new BuildingLevel(new Building(b.building.id, b.building.label), b.level);
+    });
+    player.setBuildings(buildings);
+
+    const sites = playerJson.resourceSites.map(site => {
+      return new ResourceSite(site.id, site.storage.resource, site.storage.amount, site.storage.capacity, site.droneCount);
+    });
+    player.setResourceSites(sites);
+    player.setEnergy(playerJson.energy.production.productionPerTimeUnit);
+    player.setTotalDroneCount(playerJson.totalDroneCount);
+
+    this._player.next(player);
   }
 }

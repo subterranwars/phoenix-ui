@@ -1,0 +1,219 @@
+<nav id="sidebar" class="sidebar">
+  <div class="sidebar-content">
+    <perfect-scrollbar>
+      <div class="sidebar-header">
+        <a href="#">Subterranwars</a>
+      </div>
+
+      <div class="sidebar-profile">
+        <div class="user-pic">
+          <img class="img-responsive img-rounded" src="assets/images/user.jpg" alt="Profilbild">
+        </div>
+        <div class="user-info">
+          <span class="user-name">{{player.getName()}}
+          </span>
+          <span class="user-role">Spieler</span>
+          <span class="user-status">
+            <fa-icon [icon]="['fas', 'circle']"></fa-icon>
+          </span>
+        </div>
+      </div>
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>Navigation</span>
+          </li>
+          <li>
+            <a routerLink="/main/overview" routerLinkActive="active">
+              <fa-icon [icon]="['far', 'newspaper']"></fa-icon>
+              <span>Übersicht</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/main/buildings" routerLinkActive="active">
+              <fa-icon [icon]="['far', 'building']"></fa-icon>
+              <span>Bauen</span>
+            </a>
+          </li>
+          <li>
+            <a routerLinkActive="active">
+              <fa-icon [icon]="['fas', 'flask']"></fa-icon>
+              <span>Forschen</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/main/resources" routerLinkActive="active">
+              <fa-icon [icon]="['fas', 'gem']"></fa-icon>
+              <span>Rohstoffe</span>
+            </a>
+          </li>
+          <li>
+            <a routerLinkActive="active">
+              <fa-icon [icon]="['fas', 'bolt']"></fa-icon>
+              <span>Energie</span>
+            </a>
+          </li>
+
+          <li class="header-menu">
+            <span>Rohstoffe</span>
+          </li>
+          <li *ngFor="let res of player.getResources()" class="text-sm row">
+            <div class="col-2">
+              <span>{{res.type}}</span>
+            </div>
+            <div class="col-3">
+              <span title="amount">{{res.amount}}</span>
+            </div>
+            <div class="col-3">
+              <span title="capacity">/{{res.capacity}}</span>
+            </div>
+            <div class="col-2">
+              <span [class.text-success]="res.production >= 0" [class.text-danger]="res.production < 0">{{res.production >= 0 ? '+' : ''}}{{res.production}}/min</span>
+            </div>
+          </li>
+          <li class="header-menu">
+            <span>Energie</span>
+          </li>
+          <li class="text-sm">
+              <span [class.text-success]="player.getEnergy() >= 0" [class.text-danger]="player.getEnergy() < 0">{{player.getEnergy() >= 0 ? '+' : ''}}{{player.getEnergy()}}/h</span>
+          </li>
+        </ul>
+      </div>
+    </perfect-scrollbar>
+  </div>
+  <div class="sidebar-footer">
+    <div class="dropdown" dropdown [dropup]="true">
+      <a dropdownToggle>
+        <fa-icon [icon]="['fas', 'bell']"></fa-icon>
+        <span class="badge badge-pill badge-warning notification">5</span>
+      </a>
+      <div class="dropdown-menu notifications" *dropdownMenu>
+        <div class="notifications-header">
+          <fa-icon [icon]="['fas', 'bell']"></fa-icon>
+          Notifications
+        </div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item">
+          <div class="notification-content">
+            <div class="icon text-center text-success border border-success">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            </div>
+            <div class="content">
+              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. In totam explicabo</div>
+              <div class="notification-time">
+                6 minutes ago
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="dropdown-item">
+          <div class="notification-content">
+            <div class="icon text-center text-info border border-info">
+              <fa-icon [icon]="['fas', 'exclamation']"></fa-icon>
+            </div>
+            <div class="content">
+              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. In totam explicabo</div>
+              <div class="notification-time">
+                Today
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="dropdown-item">
+          <div class="notification-content">
+            <div class="icon text-center text-warning border border-warning">
+              <fa-icon [icon]="['fas', 'exclamation']"></fa-icon>
+            </div>
+            <div class="content">
+              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. In totam explicabo</div>
+              <div class="notification-time">
+                Yesterday
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item text-center">View all notifications</a>
+      </div>
+    </div>
+    <div class="dropdown" dropdown [dropup]="true">
+      <a dropdownToggle>
+        <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
+        <span class="badge badge-pill badge-success notification">7</span>
+      </a>
+      <div class="dropdown-menu messages" *dropdownMenu>
+        <div class="messages-header">
+          <i class="fa fa-envelope"></i>
+          Messages
+        </div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item">
+          <div class="message-content">
+            <div class="pic">
+              <img src="assets/images/user.jpg" alt="">
+            </div>
+            <div class="content">
+              <div class="message-title">
+                <strong> Jhon doe</strong>
+              </div>
+              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. In totam explicabo</div>
+            </div>
+          </div>
+
+        </a>
+        <a class="dropdown-item">
+          <div class="message-content">
+            <div class="pic">
+              <img src="assets/images/user.jpg" alt="">
+            </div>
+            <div class="content">
+              <div class="message-title">
+                <strong> Jhon doe</strong>
+              </div>
+              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. In totam explicabo</div>
+            </div>
+          </div>
+
+        </a>
+        <a class="dropdown-item">
+          <div class="message-content">
+            <div class="pic">
+              <img src="assets/images/user.jpg" alt="">
+            </div>
+            <div class="content">
+              <div class="message-title">
+                <strong> Jhon doe</strong>
+              </div>
+              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. In totam explicabo</div>
+            </div>
+          </div>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item text-center">View all messages</a>
+
+      </div>
+    </div>
+    <div class="dropdown" dropdown [dropup]="true">
+      <a dropdownToggle>
+        <fa-icon [icon]="['fas', 'cog']"></fa-icon>
+        <span class="badge-sonar"></span>
+      </a>
+      <div class="dropdown-menu" *dropdownMenu>
+        <a class="dropdown-item" href="#">My profile</a>
+        <a class="dropdown-item" href="#">Help</a>
+        <a class="dropdown-item" href="#">Setting</a>
+      </div>
+    </div>
+    <div>
+      <a href="" (click)="logout()">
+        <fa-icon [icon]="['fas', 'power-off']"></fa-icon>
+      </a>
+    </div>
+  </div>
+</nav>

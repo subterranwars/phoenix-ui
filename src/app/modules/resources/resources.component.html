@@ -5,23 +5,31 @@
 <div *ngIf="player.hasResourceBuilding()">
   <h5>Neue Vorkommen suchen</h5>
   <form [formGroup]="resourceSitesForm" (ngSubmit)="onSubmit()">
-    <select formControlName="resource" (change)="changeResource($event)">
+    <select class="form-control custom-select" formControlName="resource" (change)="changeResource($event)">
       <option disabled>Wähle Rohstoff</option>
       <option *ngFor="let resource of resources" value="{{resource.id}}">{{resource.label}}</option>
     </select>
-    <button class="btn btn-sm btn-primary">suchen</button>
+    <button class="btn btn-sm btn-primary mt-2" [disabled]="!resourceSitesForm.value.resource">suchen</button>
   </form>
+
+  <h5 class="mt-4">Aktuelle Suchen</h5>
+  <div *ngFor="let search of player.getResourceSiteSearches()">
+    {{search.label}}
+  </div>
+  <div class="alert alert-info" *ngIf="player.getResourceSiteSearches().length === 0">
+    Zur Zeit wird nicht gesucht
+  </div>
 
   <h5 class="mt-4">Drohnenstatus</h5>
   <div>
     <div>
-      Vorhandene Drohnen: 30
+      Vorhandene Drohnen: {{totalCount}}
     </div>
     <div>
-      Davon benutzt: 0
+      Davon benutzt: {{usedCount}}
     </div>
     <div>
-      Unbenutzt: 30
+      Unbenutzt: {{unusedCount}}
     </div>
   </div>
 
@@ -48,6 +56,9 @@
           <td>{{site.amount}}</td>
           <td>
             <input class="form-control" type="number" value="{{site.droneCount}}" min="0" max="100" (change)="updateDroneCount(site.id, $event)"/>
+            <div class="text-danger" *ngIf="errors[site.id].droneCount">
+              Drohnenanzahl übersteigt maximal verfügbare Drohnen. Setzen nicht möglich.
+            </div>
           </td>
           <td>
             <button class="btn btn-link text-danger" title="löschen" (click)="deleteSite(site.id)"><fa-icon [icon]="['fas', 'times']"></fa-icon></button>

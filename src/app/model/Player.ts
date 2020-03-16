@@ -3,6 +3,7 @@ import {ConstructionGameEvent} from './events/ConstructionGameEvent';
 import {BuildingLevel} from './BuildingLevel';
 import {ResourceDepot} from './ResourceDepot';
 import {ResourceSite} from './ResourceSite';
+import {GameEventType} from './events/GameEventType';
 
 export class Player {
   private resourceDepots: ResourceDepot[] = [];
@@ -10,9 +11,18 @@ export class Player {
   private buildings: BuildingLevel[] = [];
   private resourceSites: ResourceSite[] = [];
   private energy: number;
+  private totalDroneCount: number;
 
   constructor(private id: number, private name: string) {
 
+  }
+
+  setTotalDroneCount(droneCount: number) {
+    this.totalDroneCount = droneCount;
+  }
+
+  getTotalDroneCount(): number {
+    return this.totalDroneCount;
   }
 
   setResourceDepots(resourceDepots: ResourceDepot[]) {
@@ -74,5 +84,19 @@ export class Player {
 
   getEnergy() {
     return this.energy;
+  }
+
+  getResourceSiteSearches() {
+    return this.getEvents().filter(event => {
+      return event.type === GameEventType.ResourceSearch;
+    });
+  }
+
+  getResourceSite(id: number) {
+    const resourceSites = this.resourceSites.filter(site => site.id === id);
+    if (resourceSites.length === 0) {
+      return null;
+    }
+    return resourceSites[0];
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ResourceService} from '../../services/resource.service';
 import {PlayerService} from '../../services/player.service';
 import {Player} from '../../model/Player';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn} from '@angular/forms';
 
 @Component({
   selector: 'app-resources',
@@ -11,6 +11,11 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class ResourcesComponent implements OnInit {
   resourceSites;
+  usedCount: number;
+  totalCount: number;
+  unusedCount: number;
+  errors: any[];
+
   player: Player;
 
   resources: any = [
@@ -33,12 +38,25 @@ export class ResourcesComponent implements OnInit {
   }
 
   refresh(): void {
-    this.resourceService.listResources().subscribe(resourceSites => {
-      this.resourceSites = resourceSites;
-      console.log(this.resourceSites);
-    });
+    this.errors = [];
     this.playerService.getPlayer().subscribe((player: Player) => {
       this.player = player;
+      this.totalCount = player.getTotalDroneCount();
+      this.resourceSites = player.getResourceSites();
+      this.resourceSites.forEach(site => {
+        this.errors[site.id] = {
+          droneCount : false
+        };
+      });
+      if (this.resourceSites.length !== 0) {
+        this.usedCount = player.getResourceSites().map(site => site.droneCount)
+          .reduce((a, b) => {
+            return a + b;
+          });
+      } else {
+        this.usedCount = 0;
+      }
+      this.unusedCount = this.totalCount - this.usedCount;
     });
   }
 
@@ -55,10 +73,17 @@ export class ResourcesComponent implements OnInit {
 
   updateDroneCount(id: number, event) {
     const droneCount: number = event.target.value;
-    this.resourceService.updateDroneCount(id, droneCount)
-      .subscribe(res => {
-        this.refresh();
-      });
+    const tmpUnusedCount = this.unusedCount;
+    const newUnusedCount = tmpUnusedCount + this.player.getResourceSite(id).droneCount - droneCount;
+    if (newUnusedCount < 0) {
+      this.errors[id].droneCount = true;
+    } else {
+      this.errors[id].droneCount = false;
+      this.resourceService.updateDroneCount(id, droneCount)
+        .subscribe(res => {
+          this.refresh();
+        });
+    }
   }
 
   deleteSite(id: number) {
