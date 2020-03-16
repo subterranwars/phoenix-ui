@@ -6,9 +6,9 @@ import {PlayerService} from './player.service';
 export class ResourceService {
   constructor(private http: HttpClient, private playerService: PlayerService) { }
 
-  search(resourceId: number, hours: number) {
+  search(resourceId: number) {
     return this.http
-      .post(`/resources?resourceId=${resourceId}&hours=${hours}`, null)
+      .post(`/resources?resourceId=${resourceId}`, null)
         .subscribe(res => {
           this.playerService.refresh();
         });

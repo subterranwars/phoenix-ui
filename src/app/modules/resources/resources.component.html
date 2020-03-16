@@ -9,10 +9,6 @@
       <option disabled>Wähle Rohstoff</option>
       <option *ngFor="let resource of resources" value="{{resource.id}}">{{resource.label}}</option>
     </select>
-    <div class="form-group">
-      <label>Dauer</label>
-      <input formControlName="duration" type="text" class="form-control"/>
-    </div>
     <button class="btn btn-sm btn-primary">suchen</button>
   </form>
 

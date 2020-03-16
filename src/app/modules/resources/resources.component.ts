@@ -24,8 +24,7 @@ export class ResourcesComponent implements OnInit {
 
   constructor(private resourceService: ResourceService, private playerService: PlayerService, public fb: FormBuilder) {
     this.resourceSitesForm = this.fb.group({
-      resource: [''],
-      duration: [1]
+      resource: ['']
     });
   }
 
@@ -51,7 +50,7 @@ export class ResourcesComponent implements OnInit {
   }
 
   onSubmit() {
-    this.resourceService.search(this.resourceSitesForm.value.resource, this.resourceSitesForm.value.duration);
+    this.resourceService.search(this.resourceSitesForm.value.resource);
   }
 
   updateDroneCount(id: number, event) {
