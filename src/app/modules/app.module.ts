@@ -43,6 +43,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import {WebSocketService} from '../services/websocket.service';
 import { MessageOverviewComponent } from './messages/messages.component';
+import { NotificationComponent } from './notifications/notifications.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -64,6 +65,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OverviewComponent,
     CountdownComponent,
 	MessageOverviewComponent,
+	NotificationComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import {MainComponent} from './main/main.component';
 import {OverviewComponent} from './overview/overview.component';
 import { MessageOverviewComponent } from './messages/messages.component';
+import { NotificationComponent } from './notifications/notifications.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'resources', component: ResourcesComponent, canActivate: [AuthGuard], data: { title: 'Resource List' }},
       { path: 'buildings', component: BuildingsComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
 	  { path: 'messages', component: MessageOverviewComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
+      { path: 'notifications', component: NotificationComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
       { path: '', redirectTo: 'overview', pathMatch: 'full'}
     ]
   },

@@ -85,11 +85,10 @@
   </div>
   <div class="sidebar-footer">
     <div class="dropdown" dropdown [dropup]="true">
-      <a dropdownToggle>
+      <a routerLink="/main/notifications" routerLinkActive="active" dropdownToggle>
         <fa-icon [icon]="['fas', 'bell']"></fa-icon>
         <span class="badge badge-pill badge-warning notification">5</span>
-      </a>
-<!--      
+      </a>     
       <div class="dropdown-menu notifications" *dropdownMenu>
         <div class="notifications-header">
           <fa-icon [icon]="['fas', 'bell']"></fa-icon>
@@ -141,7 +140,6 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item text-center">View all notifications</a>
       </div>
--->      
     </div>
     <div class="dropdown" dropdown [dropup]="true">
       <a dropdownToggle routerLink="/main/messages" routerLinkActive="active">
