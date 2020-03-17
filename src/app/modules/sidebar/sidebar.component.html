@@ -87,7 +87,7 @@
     <div class="dropdown" dropdown [dropup]="true">
       <a routerLink="/main/notifications" routerLinkActive="active" dropdownToggle>
         <fa-icon [icon]="['fas', 'bell']"></fa-icon>
-        <span class="badge badge-pill badge-warning notification">5</span>
+        <span class="badge badge-pill badge-warning notification">{{player.getUnreadNotifications().length}}</span>
       </a>     
       <div class="dropdown-menu notifications" *dropdownMenu>
         <div class="notifications-header">

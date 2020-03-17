@@ -4,6 +4,7 @@ import {BuildingLevel} from './BuildingLevel';
 import {ResourceDepot} from './ResourceDepot';
 import {ResourceSite} from './ResourceSite';
 import {GameEventType} from './events/GameEventType';
+import {Notification} from './Notification';
 
 export class Player {
   private resourceDepots: ResourceDepot[] = [];
@@ -12,6 +13,7 @@ export class Player {
   private resourceSites: ResourceSite[] = [];
   private energy: number;
   private totalDroneCount: number;
+  private notifications: Notification[] = [];
 
   constructor(private id: number, private name: string) {
 
@@ -98,5 +100,17 @@ export class Player {
       return null;
     }
     return resourceSites[0];
+  }
+
+  setNotifications(notifications: Notification[]) {
+	this.notifications = notifications;
+  }
+
+  getNotifications() : Notification[] {
+	return this.notifications;
+  }
+
+  getUnreadNotifications() : Notification[] {
+	return this.notifications.filter(notification => !notification.read);
   }
 }

@@ -1,8 +1,8 @@
 <div>
-	<h2>Ereignisse2</h2>
-	<div class="alert alert-info">Keine Ereignisse.</div>
+	<h2>Benachrichtigungen</h2>
+	<div *ngIf="player.getNotifications().length === 0" class="alert alert-info">Keine Benachrichtigungen.</div>
 
-	<div>
-
+	<div *ngFor="let notification of player.getNotifications()">
+		{{notification.label}}: {{notification.content}}
 	</div>
 </div>

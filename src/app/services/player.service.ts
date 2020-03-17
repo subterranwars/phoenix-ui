@@ -10,6 +10,7 @@ import {Resource} from '../model/Resource';
 import {ResourceDepot} from '../model/ResourceDepot';
 import {ResourceSite} from '../model/ResourceSite';
 import {Progress} from '../model/events/Progress';
+import {Notification} from '../model/Notification';
 import {WebSocketService} from './websocket.service';
 import {AuthService} from './auth.service';
 
@@ -74,6 +75,11 @@ export class PlayerService {
       return new ResourceSite(site.id, site.storage.resource, site.storage.amount, site.storage.capacity, site.droneCount);
     });
     player.setResourceSites(sites);
+
+	const notifications = playerJson.notifications.map(notification => {
+		return new Notification(1, notification.label, notification.content, notification.read, notification.completionDate);
+	});
+	player.setNotifications(notifications);
     player.setEnergy(playerJson.energy.production.productionPerTimeUnit);
     player.setTotalDroneCount(playerJson.totalDroneCount);
 
