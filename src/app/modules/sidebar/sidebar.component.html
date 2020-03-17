@@ -12,10 +12,12 @@
         <div class="user-info">
           <span class="user-name">{{player.getName()}}
           </span>
+<!--          
           <span class="user-role">Spieler</span>
           <span class="user-status">
             <fa-icon [icon]="['fas', 'circle']"></fa-icon>
           </span>
+-->          
         </div>
       </div>
       <div class="sidebar-menu">
@@ -87,10 +89,11 @@
         <fa-icon [icon]="['fas', 'bell']"></fa-icon>
         <span class="badge badge-pill badge-warning notification">5</span>
       </a>
+<!--      
       <div class="dropdown-menu notifications" *dropdownMenu>
         <div class="notifications-header">
           <fa-icon [icon]="['fas', 'bell']"></fa-icon>
-          Notifications
+          Events
         </div>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item">
@@ -106,7 +109,7 @@
               </div>
             </div>
           </div>
-        </a>
+        </a>        
         <a class="dropdown-item">
           <div class="notification-content">
             <div class="icon text-center text-info border border-info">
@@ -138,66 +141,13 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item text-center">View all notifications</a>
       </div>
+-->      
     </div>
     <div class="dropdown" dropdown [dropup]="true">
-      <a dropdownToggle>
+      <a dropdownToggle routerLink="/main/messages" routerLinkActive="active">
         <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
         <span class="badge badge-pill badge-success notification">7</span>
       </a>
-      <div class="dropdown-menu messages" *dropdownMenu>
-        <div class="messages-header">
-          <i class="fa fa-envelope"></i>
-          Messages
-        </div>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item">
-          <div class="message-content">
-            <div class="pic">
-              <img src="assets/images/user.jpg" alt="">
-            </div>
-            <div class="content">
-              <div class="message-title">
-                <strong> Jhon doe</strong>
-              </div>
-              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
-            </div>
-          </div>
-
-        </a>
-        <a class="dropdown-item">
-          <div class="message-content">
-            <div class="pic">
-              <img src="assets/images/user.jpg" alt="">
-            </div>
-            <div class="content">
-              <div class="message-title">
-                <strong> Jhon doe</strong>
-              </div>
-              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
-            </div>
-          </div>
-
-        </a>
-        <a class="dropdown-item">
-          <div class="message-content">
-            <div class="pic">
-              <img src="assets/images/user.jpg" alt="">
-            </div>
-            <div class="content">
-              <div class="message-title">
-                <strong> Jhon doe</strong>
-              </div>
-              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
-            </div>
-          </div>
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-center">View all messages</a>
-
-      </div>
     </div>
     <div class="dropdown" dropdown [dropup]="true">
       <a dropdownToggle>
@@ -205,9 +155,9 @@
         <span class="badge-sonar"></span>
       </a>
       <div class="dropdown-menu" *dropdownMenu>
-        <a class="dropdown-item" href="#">My profile</a>
-        <a class="dropdown-item" href="#">Help</a>
-        <a class="dropdown-item" href="#">Setting</a>
+        <a class="dropdown-item" routerLink="#" routerLinkActive="active">My profile</a>
+        <a class="dropdown-item" routerLink="#" routerLinkActive="active">Settings</a>
+        <a class="dropdown-item" routerLink="#" routerLinkActive="active">Help</a>
       </div>
     </div>
     <div>
