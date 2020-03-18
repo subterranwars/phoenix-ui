@@ -4,4 +4,8 @@ export class Building {
   isResourceBuilding(): boolean {
     return this.id === 7;
   }
+
+  isResearchlab() {
+    return this.id === 21;
+  }
 }

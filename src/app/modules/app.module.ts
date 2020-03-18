@@ -44,6 +44,7 @@ import { CountdownComponent } from './countdown/countdown.component';
 import {WebSocketService} from '../services/websocket.service';
 import { MessageOverviewComponent } from './messages/messages.component';
 import { NotificationComponent } from './notifications/notifications.component';
+import { ResearchComponent } from './research/research.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -66,6 +67,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CountdownComponent,
     MessageOverviewComponent,
     NotificationComponent,
+    ResearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +88,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
     { provide: 'BASE_API_URL', useValue: environment.apiUrl},
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
-    WebSocketService
+    WebSocketService // TODO MVR do we really need it here? It should be a standard service the same as everything else
   ],
   bootstrap: [AppComponent]
 })

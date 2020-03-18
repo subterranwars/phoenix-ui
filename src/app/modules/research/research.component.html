@@ -1,0 +1,21 @@
+<h3>Forschung</h3>
+
+<div *ngIf="!player.hasResearchlab()" class="alert alert-info">
+  Kein Forschungslabor, bitte bauen.
+</div>
+
+<div *ngIf="player.hasResearchlab()">
+  <div *ngFor="let info of researchInfos$ | async" class="mb-2">
+    <h6>{{ info.research.label }}</h6>
+    <span class="text-sm">Level {{ info.levelToResearch - 1}}</span>
+    <div class="text-muted text-sm">{{ info.research.description }}</div>
+    <div class="row col-12">
+      <span class="text-sm">Dauer {{info.researchTime.milliseconds / 1000}}</span>
+    </div>
+
+    <div *ngIf="player.getResearchInProgress() != null && player.getResearchInProgress().research.id === info.research.id"><app-countdown [time]="player.getResearchInProgress().progress.seconds"></app-countdown></div>
+
+    <button class="mt-2 btn btn-sm btn-primary" (click)="research(info)" [disabled]="player.isResearchInProgress()">{{ info.levelToResearch === 1 ? 'forschen' : 'weiter forschen' }}</button>
+    <hr/>
+  </div>
+</div>
