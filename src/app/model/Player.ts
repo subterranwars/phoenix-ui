@@ -103,14 +103,14 @@ export class Player {
   }
 
   setNotifications(notifications: Notification[]) {
-	this.notifications = notifications;
+    this.notifications = notifications;
   }
 
   getNotifications() : Notification[] {
-	return this.notifications;
+    return this.notifications;
   }
 
   getUnreadNotifications() : Notification[] {
-	return this.notifications.filter(notification => !notification.read);
+    return this.notifications.filter(notification => !notification.read);
   }
 }

@@ -75,10 +75,10 @@ export class PlayerService {
     });
     player.setResourceSites(sites);
 
-	const notifications = playerJson.notifications.map(notification => {
-		return new Notification(notification.id, notification.label, notification.content, notification.read, notification.completionDate);
-	});
-	player.setNotifications(notifications);
+    const notifications = playerJson.notifications.map(notification => {
+      return new Notification(notification.id, notification.label, notification.content, notification.read, notification.completionDate);
+    });
+    player.setNotifications(notifications);
     player.setEnergy(playerJson.energy.production.productionPerTimeUnit);
     player.setTotalDroneCount(playerJson.totalDroneCount);
 

@@ -18,7 +18,7 @@ const routes: Routes = [
       { path: 'overview', component: OverviewComponent, canActivate: [AuthGuard], data: { title: 'Overview' }},
       { path: 'resources', component: ResourcesComponent, canActivate: [AuthGuard], data: { title: 'Resource List' }},
       { path: 'buildings', component: BuildingsComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
-	  { path: 'messages', component: MessageOverviewComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
+      { path: 'messages', component: MessageOverviewComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
       { path: 'notifications', component: NotificationComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
       { path: '', redirectTo: 'overview', pathMatch: 'full'}
     ]

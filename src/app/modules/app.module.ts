@@ -64,8 +64,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MainComponent,
     OverviewComponent,
     CountdownComponent,
-	MessageOverviewComponent,
-	NotificationComponent,
+    MessageOverviewComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,
