@@ -12,6 +12,9 @@ import {ResourceSite} from '../model/ResourceSite';
 import {Progress} from '../model/events/Progress';
 import {WebSocketService} from './websocket.service';
 import {AuthService} from './auth.service';
+import {ResearchGameEvent} from '../model/events/ResearchGameEvent';
+import {Research} from '../model/Research';
+import {ResearchLevel} from '../model/ResearchLevel';
 
 @Injectable({
   providedIn: 'root'
@@ -63,13 +66,22 @@ export class PlayerService {
           new Resource(e.resource.id, e.resource.name, e.resource.label),
           new Progress(e.progress.indeterminate, e.progress.value, e.progress.duration.milliseconds));
       }
+      if (e.type === 'research') {
+        return new ResearchGameEvent(
+          new Research(e.research.id, e.research.label),
+          e.level,
+          new Progress(e.progress.indeterminate, e.progress.value, e.progress.duration.milliseconds));
+      }
     });
     player.setEvents(events);
     const buildings = playerJson.buildings.map(b => {
       return new BuildingLevel(new Building(b.building.id, b.building.label), b.level);
     });
     player.setBuildings(buildings);
-
+    const researchs = playerJson.researchs.map(r => {
+      return new ResearchLevel(new Research(r.research.id, r.research.label), r.level);
+    });
+    player.setResearchs(researchs);
     const sites = playerJson.resourceSites.map(site => {
       return new ResourceSite(site.id, site.storage.resource, site.storage.amount, site.storage.capacity, site.droneCount);
     });
