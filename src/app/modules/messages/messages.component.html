@@ -1,8 +1,11 @@
 <div>
   <h2>Nachrichten</h2>
-  <div class="alert alert-info">Keine Nachrichten.</div>
+  <div class="alert alert-info" *ngIf="player.getMessages().length === 0">Keine Nachrichten.</div>
 
-  <div>
+  <div *ngIf="player.getMessages().length > 0">
+    <div *ngFor="let message of player.getMessages()">
+
+    </div>
     <a class="dropdown-item">
       <div class="message-content">
         <div class="pic">

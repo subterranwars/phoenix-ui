@@ -7,7 +7,7 @@ import {Player} from '../../model/Player';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessageOverviewComponent implements OnInit {
+export class MessageComponent implements OnInit {
   player: Player;
 
   constructor(private playerService: PlayerService) { }

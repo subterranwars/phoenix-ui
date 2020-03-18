@@ -7,6 +7,7 @@ import {GameEventType} from './events/GameEventType';
 import {Notification} from './Notification';
 import {Research} from './Research';
 import {ResearchGameEvent} from './events/ResearchGameEvent';
+import {Message} from './Message';
 
 export class Player {
   private resourceDepots: ResourceDepot[] = [];
@@ -17,6 +18,7 @@ export class Player {
   private totalDroneCount: number;
   private notifications: Notification[] = [];
   private researchs: Research[] = [];
+  private messages: Message[] = [];
 
   constructor(private id: number, private name: string) {
 
@@ -135,11 +137,23 @@ export class Player {
     this.notifications = notifications;
   }
 
-  getNotifications() : Notification[] {
+  getNotifications(): Notification[] {
     return this.notifications;
   }
 
-  getUnreadNotifications() : Notification[] {
+  getUnreadNotifications(): Notification[] {
     return this.notifications.filter(notification => !notification.read);
+  }
+
+  getMessages(): Message[] {
+    return this.messages;
+  }
+
+  setMessages(messages: Message[]): void {
+    this.messages = messages;
+  }
+
+  getUnreadMessages(): Message[] {
+    return this.messages.filter(m => !m.read);
   }
 }
