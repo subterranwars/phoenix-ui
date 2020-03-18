@@ -4,6 +4,8 @@ import {BuildingLevel} from './BuildingLevel';
 import {ResourceDepot} from './ResourceDepot';
 import {ResourceSite} from './ResourceSite';
 import {GameEventType} from './events/GameEventType';
+import {Research} from './Research';
+import {ResearchGameEvent} from './events/ResearchGameEvent';
 
 export class Player {
   private resourceDepots: ResourceDepot[] = [];
@@ -12,6 +14,7 @@ export class Player {
   private resourceSites: ResourceSite[] = [];
   private energy: number;
   private totalDroneCount: number;
+  private researchs: Research[] = [];
 
   constructor(private id: number, private name: string) {
 
@@ -61,12 +64,28 @@ export class Player {
     return this.buildings.filter(b => b.building.isResourceBuilding()).length > 0;
   }
 
+  hasResearchlab(): boolean {
+    return this.buildings.filter(b => b.building.isResearchlab()).length > 0;
+  }
+
   setBuildings(buildings: BuildingLevel[]) {
     this.buildings = buildings;
   }
 
+  setResearchs(researchs: Research[]) {
+    this.researchs = researchs;
+  }
+
+  getResearchs(): Research[] {
+    return this.researchs;
+  }
+
   isConstructionInProgress(): boolean {
     return this.getConstructionInProgress() != null;
+  }
+
+  isResearchInProgress(): boolean {
+    return this.getResearchInProgress() != null;
   }
 
   getConstructionInProgress(): ConstructionGameEvent {
@@ -74,6 +93,16 @@ export class Player {
                                             .map(event => event as ConstructionGameEvent);
     if (constructionEvents.length > 0) {
       return constructionEvents[0];
+    }
+    return null;
+  }
+
+  // TODO MVR identical to getConstructionInProgress() => Is there a more dynamic way of doing this
+  getResearchInProgress(): ResearchGameEvent {
+    const researchEvents = this.events.filter(event => event instanceof ResearchGameEvent)
+                                        .map(event => event as ResearchGameEvent);
+    if (researchEvents.length > 0) {
+      return researchEvents[0];
     }
     return null;
   }
