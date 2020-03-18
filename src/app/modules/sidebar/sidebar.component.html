@@ -81,7 +81,7 @@
     <div class="dropdown" dropdown [dropup]="true">
       <a dropdownToggle>
         <fa-icon [icon]="['fas', 'bell']"></fa-icon>
-        <span class="badge badge-pill badge-warning notification">{{player.getUnreadNotifications().length}}</span>
+        <span class="badge badge-pill badge-warning notification" *ngIf="player.getUnreadNotifications().length > 0">{{player.getUnreadNotifications().length}}</span>
       </a>
       <div class="dropdown-menu notifications" *dropdownMenu>
         <div class="notifications-header">
@@ -111,7 +111,7 @@
     <div class="dropdown" dropdown [dropup]="true">
       <a dropdownToggle>
         <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
-        <span class="badge badge-pill badge-success notification">{{player.getUnreadMessages().length}}</span>
+        <span class="badge badge-pill badge-success notification" *ngIf="player.getUnreadMessages().length > 0">{{player.getUnreadMessages().length}}</span>
       </a>
       <div class="dropdown-menu messages" *dropdownMenu>
         <div class="messages-header">
