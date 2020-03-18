@@ -1,8 +1,25 @@
 <div>
 	<h2>Benachrichtigungen</h2>
-	<div *ngIf="player.getNotifications().length === 0" class="alert alert-info">Keine Benachrichtigungen.</div>
+	<div *ngIf="player.getNotifications().length === 0"
+		class="alert alert-info">Keine Benachrichtigungen.</div>
 
-	<div *ngFor="let notification of player.getNotifications()">
-		{{notification.label}}: {{notification.content}}
-	</div>
+	<table class="table table-sm table-striped"
+		*ngIf="player.getNotifications().length > 0">
+		<tbody>
+			<tr *ngFor="let notification of player.getNotifications()">
+				<td>{{notification.label}}: {{notification.content}}</td>
+				<td>
+					<button class="btn btn-link text-danger" title="mark as read"
+						(click)="markAsRead(notification.id)">
+						<fa-icon [icon]="['far', 'check-circle']"></fa-icon>
+					</button>
+				</td>
+				<td>
+					<button class="btn btn-link text-danger" title="delete"
+						(click)="deleteNotification(notification.id)">
+						<fa-icon [icon]="['fas', 'times']"></fa-icon>
+					</button>
+				</td>
+		</tbody>
+	</table>
 </div>
