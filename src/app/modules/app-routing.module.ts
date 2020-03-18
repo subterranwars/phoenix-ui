@@ -8,6 +8,8 @@ import { AuthGuard } from '../guards/auth.guard';
 import { RegisterComponent } from './register/register.component';
 import {MainComponent} from './main/main.component';
 import {OverviewComponent} from './overview/overview.component';
+import { MessageComponent } from './messages/messages.component';
+import { NotificationComponent } from './notifications/notifications.component';
 import {ResearchComponent} from './research/research.component';
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
       { path: 'overview', component: OverviewComponent, canActivate: [AuthGuard], data: { title: 'Overview' }},
       { path: 'resources', component: ResourcesComponent, canActivate: [AuthGuard], data: { title: 'Resource List' }},
       { path: 'buildings', component: BuildingsComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
+      { path: 'messages', component: MessageComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
+      { path: 'notifications', component: NotificationComponent, canActivate: [AuthGuard], data: { title: 'Building List' }},
       { path: 'research', component: ResearchComponent, canActivate: [AuthGuard], data: { title: 'Research List' }},
       { path: '', redirectTo: 'overview', pathMatch: 'full'}
     ]

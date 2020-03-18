@@ -1,0 +1,52 @@
+<div>
+  <h2>Nachrichten</h2>
+  <div class="alert alert-info" *ngIf="player.getMessages().length === 0">Keine Nachrichten.</div>
+
+  <div *ngIf="player.getMessages().length > 0">
+    <div *ngFor="let message of player.getMessages()">
+
+    </div>
+    <a class="dropdown-item">
+      <div class="message-content">
+        <div class="pic">
+          <img src="assets/images/user.jpg" alt="">
+        </div>
+        <div class="content">
+          <div class="message-title">
+            <strong> John Doe</strong>
+          </div>
+          <div class="message-detail">Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. In totam explicabo</div>
+        </div>
+      </div>
+
+    </a> <a class="dropdown-item">
+      <div class="message-content">
+        <div class="pic">
+          <img src="assets/images/user.jpg" alt="">
+        </div>
+        <div class="content">
+          <div class="message-title">
+            <strong> John Doe</strong>
+          </div>
+          <div class="message-detail">Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. In totam explicabo</div>
+        </div>
+      </div>
+
+    </a> <a class="dropdown-item">
+      <div class="message-content">
+        <div class="pic">
+          <img src="assets/images/user.jpg" alt="">
+        </div>
+        <div class="content">
+          <div class="message-title">
+            <strong> John Doe</strong>
+          </div>
+          <div class="message-detail">Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. In totam explicabo</div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

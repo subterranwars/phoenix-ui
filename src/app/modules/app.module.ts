@@ -42,6 +42,8 @@ import { MainComponent } from './main/main.component';
 import { OverviewComponent } from './overview/overview.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import {WebSocketService} from '../services/websocket.service';
+import { MessageComponent } from './messages/messages.component';
+import { NotificationComponent } from './notifications/notifications.component';
 import { ResearchComponent } from './research/research.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -63,6 +65,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MainComponent,
     OverviewComponent,
     CountdownComponent,
+    MessageComponent,
+    NotificationComponent,
     ResearchComponent,
   ],
   imports: [

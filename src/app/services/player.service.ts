@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
 import {Player} from '../model/Player';
 import {ConstructionGameEvent} from '../model/events/ConstructionGameEvent';
 import {Building} from '../model/Building';
@@ -10,6 +9,7 @@ import {Resource} from '../model/Resource';
 import {ResourceDepot} from '../model/ResourceDepot';
 import {ResourceSite} from '../model/ResourceSite';
 import {Progress} from '../model/events/Progress';
+import {Notification} from '../model/Notification';
 import {WebSocketService} from './websocket.service';
 import {AuthService} from './auth.service';
 import {ResearchGameEvent} from '../model/events/ResearchGameEvent';
@@ -86,6 +86,11 @@ export class PlayerService {
       return new ResourceSite(site.id, site.storage.resource, site.storage.amount, site.storage.capacity, site.droneCount);
     });
     player.setResourceSites(sites);
+
+    const notifications = playerJson.notifications.map(notification => {
+      return new Notification(notification.id, notification.label, notification.content, notification.read, notification.completionDate);
+    });
+    player.setNotifications(notifications);
     player.setEnergy(playerJson.energy.production.productionPerTimeUnit);
     player.setTotalDroneCount(playerJson.totalDroneCount);
 

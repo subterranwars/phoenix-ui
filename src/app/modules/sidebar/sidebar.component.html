@@ -12,10 +12,6 @@
         <div class="user-info">
           <span class="user-name">{{player.getName()}}
           </span>
-          <span class="user-role">Spieler</span>
-          <span class="user-status">
-            <fa-icon [icon]="['fas', 'circle']"></fa-icon>
-          </span>
         </div>
       </div>
       <div class="sidebar-menu">
@@ -85,118 +81,61 @@
     <div class="dropdown" dropdown [dropup]="true">
       <a dropdownToggle>
         <fa-icon [icon]="['fas', 'bell']"></fa-icon>
-        <span class="badge badge-pill badge-warning notification">5</span>
+        <span class="badge badge-pill badge-warning notification" *ngIf="player.getUnreadNotifications().length > 0">{{player.getUnreadNotifications().length}}</span>
       </a>
       <div class="dropdown-menu notifications" *dropdownMenu>
         <div class="notifications-header">
           <fa-icon [icon]="['fas', 'bell']"></fa-icon>
-          Notifications
+          <span *ngIf="player.getUnreadNotifications().length === 0">Keine&nbsp;</span>Benachrichtigungen
         </div>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item">
+        <a class="dropdown-item" *ngFor="let notification of player.getUnreadNotifications()">
           <div class="notification-content">
             <div class="icon text-center text-success border border-success">
               <fa-icon [icon]="['fas', 'check']"></fa-icon>
             </div>
             <div class="content">
-              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
+              <a class="notification-detail" routerLink="/main/notifications">
+                <strong>{{notification.label}}</strong> <br/>
+                {{notification.content}}</a>
               <div class="notification-time">
-                6 minutes ago
-              </div>
-            </div>
-          </div>
-        </a>
-        <a class="dropdown-item">
-          <div class="notification-content">
-            <div class="icon text-center text-info border border-info">
-              <fa-icon [icon]="['fas', 'exclamation']"></fa-icon>
-            </div>
-            <div class="content">
-              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
-              <div class="notification-time">
-                Today
-              </div>
-            </div>
-          </div>
-        </a>
-        <a class="dropdown-item">
-          <div class="notification-content">
-            <div class="icon text-center text-warning border border-warning">
-              <fa-icon [icon]="['fas', 'exclamation']"></fa-icon>
-            </div>
-            <div class="content">
-              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
-              <div class="notification-time">
-                Yesterday
+                {{notification.completionDate}}
               </div>
             </div>
           </div>
         </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-center">View all notifications</a>
+        <a class="dropdown-item text-center" routerLink="/main/notifications">alle Benachrichtigungen</a>
       </div>
     </div>
     <div class="dropdown" dropdown [dropup]="true">
       <a dropdownToggle>
         <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
-        <span class="badge badge-pill badge-success notification">7</span>
+        <span class="badge badge-pill badge-success notification" *ngIf="player.getUnreadMessages().length > 0">{{player.getUnreadMessages().length}}</span>
       </a>
       <div class="dropdown-menu messages" *dropdownMenu>
         <div class="messages-header">
-          <i class="fa fa-envelope"></i>
-          Messages
+          <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
+          <span *ngIf="player.getUnreadMessages().length === 0">Keine&nbsp;</span>Nachrichten
         </div>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item">
-          <div class="message-content">
-            <div class="pic">
-              <img src="assets/images/user.jpg" alt="">
+        <a class="dropdown-item" *ngFor="let message of player.getUnreadMessages()">
+          <div class="notification-content">
+            <div class="icon text-center text-success border border-success">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
             </div>
             <div class="content">
-              <div class="message-title">
-                <strong> Jhon doe</strong>
+              <a class="message-detail" routerLink="/main/messages">
+                <strong>{{message.topic}}</strong> <br/>
+                {{message.from}}</a>
+              <div class="notification-time">
+                {{message.from}}
               </div>
-              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
-            </div>
-          </div>
-
-        </a>
-        <a class="dropdown-item">
-          <div class="message-content">
-            <div class="pic">
-              <img src="assets/images/user.jpg" alt="">
-            </div>
-            <div class="content">
-              <div class="message-title">
-                <strong> Jhon doe</strong>
-              </div>
-              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
-            </div>
-          </div>
-
-        </a>
-        <a class="dropdown-item">
-          <div class="message-content">
-            <div class="pic">
-              <img src="assets/images/user.jpg" alt="">
-            </div>
-            <div class="content">
-              <div class="message-title">
-                <strong> Jhon doe</strong>
-              </div>
-              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
             </div>
           </div>
         </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-center">View all messages</a>
-
+        <a class="dropdown-item text-center" routerLink="/main/messages">alle Nachrichten</a>
       </div>
     </div>
     <div class="dropdown" dropdown [dropup]="true">
@@ -205,9 +144,9 @@
         <span class="badge-sonar"></span>
       </a>
       <div class="dropdown-menu" *dropdownMenu>
-        <a class="dropdown-item" href="#">My profile</a>
-        <a class="dropdown-item" href="#">Help</a>
-        <a class="dropdown-item" href="#">Setting</a>
+        <a class="dropdown-item" routerLink="#" routerLinkActive="active">My profile</a>
+        <a class="dropdown-item" routerLink="#" routerLinkActive="active">Settings</a>
+        <a class="dropdown-item" routerLink="#" routerLinkActive="active">Help</a>
       </div>
     </div>
     <div>
