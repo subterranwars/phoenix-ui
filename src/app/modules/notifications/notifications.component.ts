@@ -19,11 +19,11 @@ export class NotificationComponent implements OnInit {
 		});
 	}
 
-	deleteNotification(id: number): void {
+	deleteNotification(id: bigint): void {
 		this.notificationService.delete(id);
 	}
 	
-	markAsRead(id: number): void {
+	markAsRead(id: bigint): void {
 		this.notificationService.markAsRead(id);
 	}
 }

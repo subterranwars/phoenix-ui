@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { PlayerService } from './player.service';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient, private playerService: PlayerService) { }
 
-	delete(notificationId: number) {
+	delete(notificationId: bigint) {
 		console.log("Deleting: notification " + notificationId);
-		return this.http.delete(`/notifications?notificationId=${notificationId}`);
+		this.http.delete(`/notifications?notificationId=${notificationId}`).subscribe(res => { this.playerService.refresh(); });
 	}
 
-	markAsRead(notificationId: number) {
+	markAsRead(notificationId: bigint) {
 		console.log("Mark as Read: notification " + notificationId);
-		return this.http.put(`/notifications?notificationId=${notificationId}&read=true`, null);
+		this.http.patch(`/notifications?notificationId=${notificationId}`, null).subscribe(res => { this.playerService.refresh(); });
 	}
 }
