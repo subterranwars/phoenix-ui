@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '../../services/notification.service';
 import { PlayerService } from '../../services/player.service';
 import { Player } from '../../model/Player';
 
@@ -10,7 +11,7 @@ import { Player } from '../../model/Player';
 export class NotificationComponent implements OnInit {
 	player: Player;
 
-	constructor(private playerService: PlayerService) { }
+	constructor(private playerService: PlayerService, private notificationService: NotificationService) { }
 
 	ngOnInit(): void {
 		this.playerService.getPlayer().subscribe((player: Player) => {
@@ -19,10 +20,10 @@ export class NotificationComponent implements OnInit {
 	}
 
 	deleteNotification(id: number): void {
-
+		this.notificationService.delete(id);
 	}
 	
-	markAsRead(id: number) : void {
-		
+	markAsRead(id: number): void {
+		this.notificationService.markAsRead(id);
 	}
 }
