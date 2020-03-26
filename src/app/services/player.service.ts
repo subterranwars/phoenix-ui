@@ -26,17 +26,16 @@ export class PlayerService {
   private player: Observable<Player> = this._player.asObservable();
 
   constructor(private webSocketService: WebSocketService, authService: AuthService) {
-    const stompClient = this.webSocketService.connect();
-    stompClient.connect({
-      Authorization: 'Bearer ' + authService.currentToken.token
-    }, () => {
-      stompClient.subscribe('/user/updates', success => {
-        this.update(JSON.parse(success.body));
-      }, error => {
-        console.log('ERROR', error);
+    const stompClient = this.webSocketService.connect(authService.currentToken);
+    stompClient.onConnect = frame => {
+      stompClient.subscribe('/user/updates', message => {
+        this.update(JSON.parse(message.body));
       });
-    });
-
+    };
+    stompClient.onStompError = frame => {
+      console.log('Websocket error', frame);
+    };
+    stompClient.activate();
   }
 
    getPlayer(): Observable<Player> {

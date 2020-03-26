@@ -87,8 +87,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
     { provide: 'BASE_API_URL', useValue: environment.apiUrl},
+    { provide: 'BASE_WS_URL', useValue: environment.apiUrl
+        .replace('http', 'ws')
+        .replace('https', 'wss')
+    },
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
-    WebSocketService // TODO MVR do we really need it here? It should be a standard service the same as everything else
+    WebSocketService
   ],
   bootstrap: [AppComponent]
 })
